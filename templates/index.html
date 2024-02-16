@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastic AI Fitness Chatbot</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        #chatbox {
+            height: 350px; /* Set a fixed height for the chatbox */
+            overflow-y: auto; /* Make the chatbox scrollable */
+            
+        }
+        .userText, .botText {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .userText {
+            background-color: #f1f1f1;
+            text-align: right;
+        }
+        .botText {
+            background-color: #4CAF50;
+            color: white;   
+        }
+        .botText span {
+            font-weight: bold;
+        }
+        .userText span {
+            font-weight: bold;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="jumbotron text-center">AI Fitness Chatbot</h1>
+        <h5 class="text-center">Bard Api is free, That's why not taking</h5>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 offset-sm-3">
+                    <div id="chatbox" class="border border-success">
+                        <p class="botText"><span>Welcome to the Fitness Chatbot </span></p>
+                    </div>
+                    <div id="userInput">
+                
+                <div id="userInput" class="mb-3">
+                    <input id="textInput" class="form-control" type="text" name="msg" placeholder="Type your message here...">
+                    <button id="buttonInput" class="btn btn-success btn-block mt-2">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        function getResponse() {
+            let userText = $("#textInput").val().trim();
+            if (userText === "") return; // Do nothing if input is empty
+            let userHtml = '<p class="userText"><span>' + userText + '</span></p>';
+            $("#textInput").val("");
+            $("#chatbox").append(userHtml);
+            $("#chatbox").animate({ scrollTop: $('#chatbox').prop("scrollHeight")}, 1000);
+
+            // Show a toast notification that it may take 5 seconds
+            toastr.info("Processing your request. This may take up to 5 seconds or even more...");
+
+            $.get("/get", { msg: userText }).done(function(data) {
+                var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+                $("#chatbox").append(botHtml);
+                $("#chatbox").animate({ scrollTop: $('#chatbox').prop("scrollHeight")}, 1000);
+            });
+        }
+
+        $("#textInput").keypress(function(e) {
+            if (e.which == 13) {
+                getResponse();
+            }
+        });
+
+        $("#buttonInput").click(function() {
+            getResponse();
+        });
+    </script>
+</body>
+</html>

@@ -4,8 +4,8 @@ import main1 as main1
 import string 
 from difflib import SequenceMatcher
 import awsgi
-# Creating a Flask application instance
-application = Flask(__name__)
+# Creating a Flask app instance
+app = Flask(__name__)
 first_time = True
 def get_response(chatbot, user_input):
     global first_time
@@ -30,15 +30,15 @@ def get_response(chatbot, user_input):
 
 
 # Defining the route for the home page
-@application.route("/")
+@app.route("/")
 def index():
     return render_template("index.html")
 
 # Defining the route for getting bot response
 
-@application.route("/get")
+@app.route("/get")
 
-@application.route("/get")
+@app.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
     chatbot = main1.create_chatbot()
@@ -62,5 +62,5 @@ def get_bot_response():
                     return f"An error occurred: {str(e)}  Trying again"
 
 
-def lambda_handler(event, context):
-    return awsgi.response(application, event, context, base64_content_types={"image/png"})
+if __name__ == '__main__':
+    app.run(debug=True)

@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import main1 as main1
 import string 
 from difflib import SequenceMatcher
-import awsgi
+
 # Creating a Flask app instance
 app = Flask(__name__)
 first_time = True

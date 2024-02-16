@@ -117,6 +117,19 @@ sm = {
       {
         "question": "exit",
         "answer": "Okay"
+      },  {
+        "question": "thanks",
+        "answer": "😊"
+      },
+        {
+        "question": "thank you",
+        "answer": "😊"
+      },  {
+        "question": "Okay",
+        "answer": "😊"
+      },{
+        "question": "by",
+        "answer": "😊"
       }
     ]
   }
@@ -153,6 +166,8 @@ def best_information(user_query,links =None):
             --------
           if text is like (okay, done) then you have to do conversation like user is talking to you 
           REMEMBER -: IT SHOULD BE A CONVERsation
+          - do not go out of the track 
+
           """
      prompt = chat(prompt)
      return prompt

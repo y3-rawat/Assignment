@@ -62,5 +62,3 @@ def get_bot_response():
                     return f"An error occurred: {str(e)}  Trying again"
 
 
-if __name__ == '__main__':
-    app.run(debug=True)

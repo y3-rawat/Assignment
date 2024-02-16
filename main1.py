@@ -151,7 +151,8 @@ def best_information(user_query,links =None):
             ----------
             {user_query}
             --------
-          if text is like (okay, done) then you have to do conversation like user is talking to you
+          if text is like (okay, done) then you have to do conversation like user is talking to you 
+          REMEMBER -: IT SHOULD BE A CONVERsation
           """
      prompt = chat(prompt)
      return prompt
